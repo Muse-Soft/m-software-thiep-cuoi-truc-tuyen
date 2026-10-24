@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thiệp cưới — [CHỜ BỔ SUNG]</title>
+<meta name="description" content="Thiệp mời cưới trực tuyến. Tên cô dâu chú rể, ngày cưới và địa điểm đang chờ bổ sung.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700&family=Great+Vibes&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main>
+  <!-- Mục 1 — Mở đầu -->
+  <section id="mo-dau" class="hero">
+    <div class="hero__overlay"></div>
+    <div class="hero__content">
+      <p class="hero__eyebrow">Thiệp mời cưới</p>
+      <h1 class="hero__names">
+        <span class="name">[CHỜ BỔ SUNG]</span>
+        <span class="amp">&amp;</span>
+        <span class="name">[CHỜ BỔ SUNG]</span>
+      </h1>
+      <p class="hero__date">Ngày cưới: <strong>[CHỜ BỔ SUNG]</strong></p>
+      <div class="countdown" aria-label="Đếm ngược tới lễ cưới">
+        <div class="countdown__box"><span class="countdown__num" id="cd-days">--</span><span class="countdown__label">ngày</span></div>
+        <div class="countdown__box"><span class="countdown__num" id="cd-hours">--</span><span class="countdown__label">giờ</span></div>
+        <div class="countdown__box"><span class="countdown__num" id="cd-mins">--</span><span class="countdown__label">phút</span></div>
+        <div class="countdown__box"><span class="countdown__num" id="cd-secs">--</span><span class="countdown__label">giây</span></div>
+      </div>
+      <p class="countdown__note">Đồng hồ đếm ngược sẽ chạy khi có ngày cưới thật.</p>
+      <a class="hero__scroll" href="#cau-chuyen">↓ Xem thiệp</a>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"><span>✿</span></div>
+
+  <!-- Mục 2 — Câu chuyện tình yêu -->
+  <section id="cau-chuyen" class="section">
+    <h2 class="section__title">Câu chuyện của chúng mình</h2>
+    <div class="placeholder-frame" role="status">
+      <p>Các mốc câu chuyện tình yêu sẽ hiển thị tại đây.</p>
+      <p class="placeholder-frame__tag">[CHỜ BỔ SUNG]</p>
+      <p class="placeholder-frame__note">Chưa có mốc nào — không hiển thị nội dung giả.</p>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"><span>✿</span></div>
+
+  <!-- Mục 3 — Album ảnh -->
+  <section id="album" class="section section--alt">
+    <h2 class="section__title">Khoảnh khắc của chúng mình</h2>
+    <p class="section__note">Ảnh cưới thật đang chờ bổ sung — các ô dưới đây chỉ là khung giữ chỗ.</p>
+    <div class="album-grid" id="album-grid">
+      <button type="button" class="album-tile" data-index="0" aria-label="Ảnh cưới mẫu 1">Ảnh cưới — [CHỜ BỔ SUNG]</button>
+      <button type="button" class="album-tile" data-index="1" aria-label="Ảnh cưới mẫu 2">Ảnh cưới — [CHỜ BỔ SUNG]</button>
+      <button type="button" class="album-tile" data-index="2" aria-label="Ảnh cưới mẫu 3">Ảnh cưới — [CHỜ BỔ SUNG]</button>
+      <button type="button" class="album-tile" data-index="3" aria-label="Ảnh cưới mẫu 4">Ảnh cưới — [CHỜ BỔ SUNG]</button>
+      <button type="button" class="album-tile" data-index="4" aria-label="Ảnh cưới mẫu 5">Ảnh cưới — [CHỜ BỔ SUNG]</button>
+      <button type="button" class="album-tile" data-index="5" aria-label="Ảnh cưới mẫu 6">Ảnh cưới — [CHỜ BỔ SUNG]</button>
+    </div>
+    <div class="lightbox" id="lightbox" hidden>
+      <button type="button" class="lightbox__close" id="lb-close" aria-label="Đóng">✕</button>
+      <button type="button" class="lightbox__nav lightbox__nav--prev" id="lb-prev" aria-label="Ảnh trước">‹</button>
+      <div class="lightbox__content" id="lb-content">Ảnh cưới — [CHỜ BỔ SUNG]</div>
+      <button type="button" class="lightbox__nav lightbox__nav--next" id="lb-next" aria-label="Ảnh sau">›</button>
+      <p class="lightbox__counter" id="lb-counter"></p>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"><span>✿</span></div>
+
+  <!-- Mục 4 — Lịch trình lễ và tiệc -->
+  <section id="lich-trinh" class="section">
+    <h2 class="section__title">Lịch trình ngày cưới</h2>
+    <div class="schedule">
+      <article class="schedule__card">
+        <p class="schedule__time">[CHỜ BỔ SUNG]</p>
+        <h3 class="schedule__name">Lễ cưới</h3>
+        <p class="schedule__place">Địa điểm: [CHỜ BỔ SUNG]</p>
+        <p class="schedule__note">Ghi chú: [CHỜ BỔ SUNG]</p>
+      </article>
+      <article class="schedule__card">
+        <p class="schedule__time">[CHỜ BỔ SUNG]</p>
+        <h3 class="schedule__name">Tiệc mừng</h3>
+        <p class="schedule__place">Địa điểm: [CHỜ BỔ SUNG]</p>
+        <p class="schedule__note">Ghi chú: [CHỜ BỔ SUNG]</p>
+      </article>
+    </div>
+    <button type="button" class="btn btn--outline" id="add-calendar">Thêm vào lịch</button>
+    <p class="inline-note" id="calendar-note" hidden>Chưa có ngày giờ thật — nút sẽ tạo file .ics / link Google Calendar khi PO bổ sung ngày giờ.</p>
+  </section>
+
+  <div class="divider" aria-hidden="true"><span>✿</span></div>
+
+  <!-- Mục 5 — Địa điểm + bản đồ -->
+  <section id="dia-diem" class="section section--alt">
+    <h2 class="section__title">Địa điểm tổ chức</h2>
+    <div class="venue-card">
+      <h3 class="venue-card__name">[CHỜ BỔ SUNG]</h3>
+      <p class="venue-card__address">Địa chỉ: [CHỜ BỔ SUNG]</p>
+      <div class="venue-card__actions">
+        <button type="button" class="btn btn--primary" id="open-map">Xem bản đồ</button>
+        <button type="button" class="btn btn--outline" id="copy-address">Sao chép địa chỉ</button>
+      </div>
+      <p class="inline-note" id="map-note" hidden>Link Google Maps: [CHỜ BỔ SUNG] — nút sẽ mở bản đồ ở tab mới khi có link thật.</p>
+      <p class="inline-note" id="copy-note" hidden>Chưa có địa chỉ thật để sao chép.</p>
+    </div>
+    <div class="map-placeholder" role="status">
+      <p>Bản đồ sẽ được nhúng tại đây khi có địa chỉ thật.</p>
+      <p class="placeholder-frame__tag">[CHỜ BỔ SUNG]</p>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"><span>✿</span></div>
+
+  <!-- Mục 6 — Xác nhận tham dự: THUỘC PHẠM VI TEC-109 (rsvp-form), trang này chỉ giữ khung neo -->
+  <section id="rsvp" class="section">
+    <h2 class="section__title">Bạn sẽ đến chung vui chứ?</h2>
+    <div class="placeholder-frame" role="status">
+      <p>Form xác nhận tham dự đang được triển khai ở task TEC-109.</p>
+      <p class="placeholder-frame__note">Trang này không chứa form RSVP để tránh xung đột với TEC-109.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <p>Thiệp cưới trực tuyến — mọi dữ liệu thật đang chờ bổ sung, không có nội dung bịa.</p>
+</footer>
+
+<a href="#rsvp" class="fab" id="fab-rsvp" hidden>Xác nhận tham dự</a>
+<script src="main.js"></script>
+</body>
+</html>
