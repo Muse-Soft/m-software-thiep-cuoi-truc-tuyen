@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Xác nhận tham dự — Thiệp cưới trực tuyến</title>
+<!--
+  Mục RSVP của thiệp cưới trực tuyến (task TEC-109, theo DESIGN.md §5.6).
+  File tự chứa (HTML + CSS + JS trong một file) để mở trực tiếp và để task
+  trang chính (TEC-108) nhúng vào index.html sau mà không xung đột file.
+  BẢN DEMO GIAO DIỆN: form chưa nối lưu trữ thật — xem dòng chú thích dưới form.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+  /* Bảng màu DESIGN.md §2: hồng pastel + vàng gold, nền luôn nhạt. */
+  :root{
+    --bg:#FDF2F4; --bg-alt:#FFF9F5; --pink:#E8A2B4; --gold:#C9A227;
+    --ink:#4A3F42; --muted:#8A7D80; --btn:#D87E96; --ok:#7FB069; --err:#C4576B;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Be Vietnam Pro", system-ui, sans-serif; font-size:16px; line-height:1.6;
+  }
+  .rsvp{max-width:720px; margin:0 auto; padding:20px; background:var(--bg-alt)}
+  .rsvp__divider{height:1px; background:var(--gold); position:relative; margin:8px 0 24px}
+  .rsvp__divider::after{content:"✿"; position:absolute; left:50%; top:-11px;
+    transform:translateX(-50%); background:var(--bg-alt); color:var(--gold); padding:0 8px}
+  h2{font-family:"Playfair Display", serif; color:var(--pink); text-align:center;
+    font-size:32px; margin:8px 0 4px}
+  .rsvp__lead{text-align:center; color:var(--muted); margin:0 0 24px}
+  label{display:block; font-weight:500; margin:16px 0 6px}
+  label .req{color:var(--err)}
+  input, textarea{
+    width:100%; padding:12px 14px; font:inherit; color:var(--ink);
+    border:1.5px solid var(--pink); border-radius:12px; background:#fff;
+  }
+  input:focus, textarea:focus{outline:2px solid var(--gold); outline-offset:1px}
+  textarea{resize:vertical; min-height:110px}
+  .field-error{display:none; color:var(--err); font-size:14px; margin-top:6px}
+  .field-error.show{display:block}
+  .field-invalid{border-color:var(--err)}
+  button[type="submit"]{
+    display:block; width:100%; min-height:44px; margin-top:24px; cursor:pointer;
+    background:var(--btn); color:#fff; font:inherit; font-weight:700;
+    border:none; border-radius:999px;
+  }
+  button[type="submit"]:hover{filter:brightness(1.05)}
+  .rsvp__demo-note{text-align:center; color:var(--muted); font-size:14px; margin:16px 0 0}
+  .rsvp__success{display:none; border:1.5px solid var(--ok); border-radius:16px;
+    padding:20px; background:#F2F7EE}
+  .rsvp__success.show{display:block}
+  .rsvp__success h3{color:var(--ok); margin:0 0 8px; font-family:"Playfair Display", serif}
+  .rsvp__success dl{margin:0}
+  .rsvp__success dt{font-weight:500; color:var(--muted); margin-top:8px}
+  .rsvp__success dd{margin:0; white-space:pre-wrap; word-break:break-word}
+  .rsvp__again{
+    margin-top:20px; min-height:44px; width:100%; cursor:pointer; font:inherit;
+    background:#fff; color:var(--ink); border:1.5px solid var(--pink); border-radius:999px;
+  }
+  @media (min-width:768px){
+    h2{font-size:40px}
+    body{font-size:17px}
+  }
+</style>
+</head>
+<body>
+<section class="rsvp" id="rsvp">
+  <div class="rsvp__divider" aria-hidden="true"></div>
+  <h2>Bạn sẽ đến chung vui chứ?</h2>
+  <p class="rsvp__lead">Điền thông tin bên dưới để chúng mình chuẩn bị đón tiếp chu đáo.</p>
+
+  <form id="rsvp-form" novalidate>
+    <label for="rsvp-name">Họ tên <span class="req">*</span></label>
+    <input id="rsvp-name" name="name" type="text" maxlength="100"
+           placeholder="Ví dụ: Nguyễn Văn An" autocomplete="name">
+    <p class="field-error" id="err-name">Vui lòng nhập họ tên.</p>
+
+    <label for="rsvp-guests">Số khách (bao gồm bạn) <span class="req">*</span></label>
+    <input id="rsvp-guests" name="guests" type="number" min="1" step="1" value="1"
+           inputmode="numeric" placeholder="1">
+    <p class="field-error" id="err-guests">Số khách phải là số nguyên từ 1 trở lên.</p>
+
+    <label for="rsvp-message">Lời chúc</label>
+    <textarea id="rsvp-message" name="message" maxlength="500"
+              placeholder="Gửi lời chúc tới cô dâu chú rể (không bắt buộc)"></textarea>
+    <p class="field-error" id="err-message">Lời chúc tối đa 500 ký tự.</p>
+
+    <button type="submit">Gửi xác nhận</button>
+    <p class="rsvp__demo-note">Bản demo giao diện — form chưa nối lưu trữ thật, thông tin bạn gửi chưa được lưu lại.</p>
+  </form>
+
+  <div class="rsvp__success" id="rsvp-success" role="status">
+    <h3>Cảm ơn bạn đã xác nhận!</h3>
+    <dl>
+      <dt>Họ tên</dt><dd id="sum-name"></dd>
+      <dt>Số khách</dt><dd id="sum-guests"></dd>
+      <dt>Lời chúc</dt><dd id="sum-message"></dd>
+    </dl>
+    <p class="rsvp__demo-note">Đây là bản demo giao diện — thông tin trên chưa được lưu trữ thật.</p>
+    <button type="button" class="rsvp__again" id="rsvp-again">Gửi xác nhận khác</button>
+  </div>
+</section>
+
+<script>
+/* Kiểm tra hợp lệ phía client — hàm thuần, có thể kiểm thử độc lập (xem test kèm PR).
+   Quy tắc theo TEC-109: họ tên bắt buộc (tối đa 100 ký tự),
+   số khách là số nguyên >= 1, lời chúc tối đa 500 ký tự (không bắt buộc). */
+function validateRSVP(data) {
+  var errors = {};
+  var name = (data.name || "").trim();
+  if (!name) errors.name = "Vui lòng nhập họ tên.";
+  else if (name.length > 100) errors.name = "Họ tên tối đa 100 ký tự.";
+  var guests = Number(data.guests);
+  if (data.guests === "" || data.guests === null || data.guests === undefined
+      || !Number.isInteger(guests) || guests < 1) {
+    errors.guests = "Số khách phải là số nguyên từ 1 trở lên.";
+  }
+  var message = data.message || "";
+  if (message.length > 500) errors.message = "Lời chúc tối đa 500 ký tự.";
+  return { ok: Object.keys(errors).length === 0, errors: errors };
+}
+
+(function () {
+  var form = document.getElementById("rsvp-form");
+  var success = document.getElementById("rsvp-success");
+  var fields = {
+    name:    { input: document.getElementById("rsvp-name"),    err: document.getElementById("err-name") },
+    guests:  { input: document.getElementById("rsvp-guests"),  err: document.getElementById("err-guests") },
+    message: { input: document.getElementById("rsvp-message"), err: document.getElementById("err-message") }
+  };
+  function showErrors(errors) {
+    Object.keys(fields).forEach(function (key) {
+      var f = fields[key];
+      if (errors[key]) {
+        f.err.textContent = errors[key];
+        f.err.classList.add("show");
+        f.input.classList.add("field-invalid");
+      } else {
+        f.err.classList.remove("show");
+        f.input.classList.remove("field-invalid");
+      }
+    });
+  }
+  form.addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    var data = {
+      name: fields.name.input.value,
+      guests: fields.guests.input.value,
+      message: fields.message.input.value
+    };
+    var result = validateRSVP(data);
+    showErrors(result.errors);
+    if (!result.ok) return; /* giữ nguyên dữ liệu đã nhập */
+    document.getElementById("sum-name").textContent = data.name.trim();
+    document.getElementById("sum-guests").textContent = String(Number(data.guests));
+    document.getElementById("sum-message").textContent = data.message.trim() || "—";
+    form.style.display = "none";
+    success.classList.add("show");
+  });
+  document.getElementById("rsvp-again").addEventListener("click", function () {
+    form.reset();
+    fields.guests.input.value = "1";
+    showErrors({});
+    success.classList.remove("show");
+    form.style.display = "";
+    fields.name.input.focus();
+  });
+})();
+</script>
+</body>
+</html>
