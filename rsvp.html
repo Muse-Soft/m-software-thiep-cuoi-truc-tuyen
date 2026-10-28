@@ -5,16 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Xác nhận tham dự — Thiệp cưới trực tuyến</title>
 <!--
-  Mục RSVP của thiệp cưới trực tuyến (task TEC-109, theo DESIGN.md §5.6).
-  TEC-117 bổ sung nhóm radio tham dự "Sẽ đến" / "Không đến được" (§5.6, quyết định PO 2026-10-24).
+  Mục RSVP của thiệp cưới trực tuyến. Bổ sung nhóm radio tham dự "Sẽ đến" / "Không đến được" (§5.6, quyết định PO 2026-10-24).
   File tự chứa (HTML + CSS + JS trong một file) để mở trực tiếp và để task
-  trang chính (TEC-108) nhúng vào index.html sau mà không xung đột file.
+  trang chính nhúng vào index.html sau mà không xung đột file.
   BẢN DEMO GIAO DIỆN: form chưa nối lưu trữ thật — xem dòng chú thích dưới form.
 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 <style>
-  /* Bảng màu DESIGN.md §2: hồng pastel + vàng gold, nền luôn nhạt. */
+  /* Bảng màu đặc tả thiết kế: hồng pastel + vàng gold, nền luôn nhạt. */
   :root{
     --bg:#FDF2F4; --bg-alt:#FFF9F5; --pink:#E8A2B4; --gold:#C9A227;
     --ink:#4A3F42; --muted:#8A7D80; --btn:#D87E96; --ok:#7FB069; --err:#C4576B;
@@ -42,7 +41,7 @@
   .field-error{display:none; color:var(--err); font-size:14px; margin-top:6px}
   .field-error.show{display:block}
   .field-invalid{border-color:var(--err)}
-  /* Nhóm radio tham dự (TEC-117, DESIGN.md §5.6): luôn có đúng một lựa chọn. */
+  /* Nhóm radio tham dự (đặc tả thiết kế): luôn có đúng một lựa chọn. */
   .rsvp__attendance{border:none; padding:0; margin:16px 0 0}
   .rsvp__attendance legend{font-weight:500; margin-bottom:6px}
   .rsvp__radio{display:flex; align-items:center; gap:10px; min-height:44px;
@@ -125,7 +124,7 @@
 
 <script>
 /* Kiểm tra hợp lệ phía client — hàm thuần, có thể kiểm thử độc lập (xem test kèm PR).
-   Quy tắc theo TEC-109: họ tên bắt buộc (tối đa 100 ký tự),
+   Quy tắc: họ tên bắt buộc (tối đa 100 ký tự),
    số khách là số nguyên >= 1, lời chúc tối đa 500 ký tự (không bắt buộc). */
 function validateRSVP(data) {
   var errors = {};
@@ -169,7 +168,7 @@ function validateRSVP(data) {
       name: fields.name.input.value,
       guests: fields.guests.input.value,
       message: fields.message.input.value,
-      /* TEC-117: radio luôn có đúng một lựa chọn (mặc định "Sẽ đến"). */
+      /* radio luôn có đúng một lựa chọn (mặc định "Sẽ đến"). */
       attendance: document.querySelector('input[name="attendance"]:checked').value
     };
     var result = validateRSVP(data);

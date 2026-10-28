@@ -1,4 +1,4 @@
-// Thiệp cưới — TEC-108. Mọi dữ liệu thật đều là placeholder cho tới khi PO bổ sung.
+// Thiệp cưới. Mọi dữ liệu thật đều là placeholder cho tới khi PO bổ sung.
 (function () {
   "use strict";
 
